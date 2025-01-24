@@ -132,7 +132,3 @@ git push origin feat/awesome-feature
 
 📄 **License**: MIT © 2025 Ivan
 🐛 **Report Issues**: [GitHub Issues](https://github.com/IvanDec0/module_copy_tool/issues)
-
-```
-
-```
