@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+# Load libraries
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/logging.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/validation.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/replacements.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../lib/backup.sh"
+
+main() {
+    init_environment
+    init_logging
+    parse_arguments "$@"
+    
+    if [ -n "$list_backups" ]; then
+        [ -z "$module_name" ] && handle_error "Missing module name for backup list"
+        display_available_backups "$module_name"
+        exit 0
+    fi
+
+    if [ -n "$restore_module" ]; then
+        module_name="$restore_module"
+        validate_restore
+        confirm_operation "Restore module ${module_name} from backup?"
+        restore_backup
+        exit 0
+    fi
+
+    validate_required_params
+    validate_environment
+    validate_inputs
+    check_git_status
+    show_summary
+    confirm_operation "Proceed with module copy operation?"
+    create_backup
+    copy_module
+    perform_replacements
+    run_post_hooks
+    final_summary
+}
+
+# Entry point
+main "$@"
