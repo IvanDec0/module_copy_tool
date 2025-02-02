@@ -1,45 +1,150 @@
 #!/usr/bin/env bash
-
+# @file Module duplication tool with backup/restore functionality
 set -eo pipefail
+trap 'cleanup_on_error $?' ERR
+trap 'cleanup' EXIT
 
-# Load libraries
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/utils.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/logging.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/validation.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/replacements.sh"
-source "$(dirname "${BASH_SOURCE[0]}")/../lib/backup.sh"
+# Define script paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd '..' && pwd)"
+LIB_DIR="${SCRIPT_DIR}/lib"
 
+# Validate library directory
+[ ! -d "$LIB_DIR" ] && { echo "Error: Library directory not found"; exit 1; }
+
+declare -a LIBRARIES=(
+    "logging"   # Load first to define log functions
+    "utils"     # Now can safely use log_error
+    "validation"
+    "replacements"
+    "backup"
+)
+
+# Load libraries in order
+for lib in "${LIBRARIES[@]}"; do
+    lib_path="${LIB_DIR}/${lib}.sh"
+    if [ -f "$lib_path" ]; then
+        # shellcheck disable=SC1090
+        source "$lib_path" || { echo "Error loading ${lib}"; exit 1; }
+    else
+        echo "Error: Required library ${lib}.sh not found"
+        exit 1
+    fi
+done
+
+# Git status check
+check_git_status() {
+    if command -v git >/dev/null 2>&1; then
+        if git rev-parse --git-dir > /dev/null 2>&1; then
+            if ! git diff-index --quiet HEAD --; then
+                log_warning "Uncommitted changes detected in git repository"
+                if [[ "${CONFIG[interactive]}" == true ]]; then
+                    confirm_operation "Continue despite uncommitted changes?"
+                fi
+            fi
+        fi
+    fi
+    return 0
+}
+
+# Copy module function
+copy_module() {
+    # Validate required variables
+    [ -z "$module_name" ] && handle_error "Source module name not set"
+    [ -z "$plural_new" ] && handle_error "New module name not set"
+    [ -z "$src_dir" ] && handle_error "Source directory path not set"
+    [ -z "$dest_dir" ] && handle_error "Destination directory path not set"
+
+    log_info "Copying module ${module_name} to ${plural_new}"
+
+    if [[ "${CONFIG[dry_run]}" != true ]]; then
+        mkdir -p "$dest_dir" || handle_error "Failed to create destination directory"
+        cp -r "$src_dir/." "$dest_dir/" || handle_error "Failed to copy module"
+    fi
+    log_success "Module copied successfully"
+}
+
+# Confirm operation
+confirm_operation() {
+    local message=$1
+    local exit_code=${2:-0}  # Default to 0 if no exit code is provided
+    if [[ "${CONFIG[interactive]}" == true ]]; then
+        read -rp "$message (y/N): " confirm
+        confirm=${confirm:-N}  # Default to 'N'
+        if [[ $confirm =~ ^[Yy] ]]; then
+    log_info "User confirmed operation: $message"
+else
+    log_warning "User declined operation: $message"
+    exit "$exit_code"
+fi
+    fi
+}
+
+# Run post-copy hooks
+run_post_hooks() {
+    if [[ "${CONFIG[dry_run]}" != true ]]; then
+        setup_replacements
+        perform_replacements
+    fi
+}
+
+# Display final summary
+final_summary() {
+    if [[ "${CONFIG[dry_run]}" == true ]]; then
+        log_info "Dry run completed successfully"
+    else
+        log_success "Module copy completed successfully"
+        log_info "New module created at: $dest_dir"
+        [ -n "$backup_dir_final" ] && log_info "Backup stored at: $backup_dir_final"
+    fi
+}
+
+# Main execution flow
 main() {
-    init_environment
-    init_logging
+    log_success "Module Copy Tool"
+    # Initialize logging FIRST
+    init_logging || {
+        echo "❌ Failed to initialize logging" >&2
+        exit 1
+    }
     parse_arguments "$@"
-    
-    if [ -n "$list_backups" ]; then
-        [ -z "$module_name" ] && handle_error "Missing module name for backup list"
+
+    # Now handle operations
+    if [[ "${CONFIG[list_backups]}" == true ]]; then
+        [ -z "$module_name" ] && handle_error "Missing module name"
         display_available_backups "$module_name"
+        cleanup "normal_exit"
         exit 0
     fi
 
     if [ -n "$restore_module" ]; then
         module_name="$restore_module"
         validate_restore
-        confirm_operation "Restore module ${module_name} from backup?"
+        confirm_operation "Restore module ${module_name}?"
         restore_backup
+        cleanup "normal_exit"
         exit 0
     fi
 
-    validate_required_params
-    validate_environment
-    validate_inputs
-    check_git_status
-    show_summary
-    confirm_operation "Proceed with module copy operation?"
-    create_backup
-    copy_module
-    perform_replacements
-    run_post_hooks
-    final_summary
+    if [ -n "$module_name" ] && [ -n "$plural_new" ]; then
+        init_environment
+        validate_required_params
+        validate_environment
+        validate_inputs
+        check_git_status
+        show_summary
+        confirm_operation "Proceed with copy?"
+        create_backup
+        copy_module
+        run_post_hooks
+        final_summary
+        cleanup "normal_exit"
+        exit 0
+    fi
+
+    handle_error "No valid operation specified"
+    cleanup "error_exit"
+    exit 1
 }
 
-# Entry point
+# Entry point with proper error trapping
 main "$@"

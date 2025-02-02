@@ -1,0 +1,623 @@
+
+/bin/module-copy
+#!/usr/bin/env bash
+# @file Module duplication tool with backup/restore functionality
+set -eo pipefail
+trap 'cleanup_on_error $?' ERR
+trap 'cleanup' EXIT
+
+# Define script paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LIB_DIR="${SCRIPT_DIR}/../lib"
+
+# Validate library directory
+[ ! -d "$LIB_DIR" ] && { echo "Error: Library directory not found"; exit 1; }
+
+declare -a LIBRARIES=(
+    "logging"   # Load first to define log functions
+    "utils"     # Now can safely use log_error
+    "validation"
+    "replacements"
+    "backup"
+)
+
+# Load libraries in order
+for lib in "${LIBRARIES[@]}"; do
+    lib_path="${LIB_DIR}/${lib}.sh"
+    if [ -f "$lib_path" ]; then
+        # shellcheck disable=SC1090
+        source "$lib_path" || { echo "Error loading ${lib}"; exit 1; }
+    else
+        echo "Error: Required library ${lib}.sh not found"
+        exit 1
+    fi
+done
+
+# Git status check
+check_git_status() {
+    if command -v git >/dev/null 2>&1; then
+        if git rev-parse --git-dir > /dev/null 2>&1; then
+            if ! git diff-index --quiet HEAD --; then
+                log_warning "Uncommitted changes detected in git repository"
+                if [[ "${CONFIG[interactive]}" == true ]]; then
+                    confirm_operation "Continue despite uncommitted changes?"
+                fi
+            fi
+        fi
+    fi
+}
+
+# Copy module function
+copy_module() {
+    # Validate required variables
+    [ -z "$module_name" ] && handle_error "Source module name not set"
+    [ -z "$plural_new" ] && handle_error "New module name not set"
+    [ -z "$src_dir" ] && handle_error "Source directory path not set"
+    [ -z "$dest_dir" ] && handle_error "Destination directory path not set"
+
+    log_info "Copying module ${module_name} to ${plural_new}"
+
+    if [[ "${CONFIG[dry_run]}" != true ]]; then
+        mkdir -p "$dest_dir" || handle_error "Failed to create destination directory"
+        cp -r "$src_dir/." "$dest_dir/" || handle_error "Failed to copy module"
+    fi
+}
+
+# Confirm operation
+confirm_operation() {
+    local message=$1
+    if [[ "${CONFIG[interactive]}" == true ]]; then
+        read -rp "$message (y/N): " confirm
+        [[ ! $confirm =~ ^[Yy] ]] && exit 0
+    fi
+}
+
+# Run post-copy hooks
+run_post_hooks() {
+    if [[ "${CONFIG[dry_run]}" != true ]]; then
+        setup_replacements
+        perform_replacements
+    fi
+}
+
+# Display final summary
+final_summary() {
+    if [[ "${CONFIG[dry_run]}" == true ]]; then
+        log_info "Dry run completed successfully"
+    else
+        log_success "Module copy completed successfully"
+        log_info "New module created at: $dest_dir"
+        [ -n "$backup_dir_final" ] && log_info "Backup stored at: $backup_dir_final"
+    fi
+}
+
+# Main execution flow
+main() {
+    parse_arguments "$@"
+    # Initialize logging FIRST
+    init_logging || {
+        echo "❌ Failed to initialize logging" >&2
+        exit 1
+    }
+
+    # Now handle operations
+    if [[ "${CONFIG[list_backups]}" == true ]]; then
+        [ -z "$module_name" ] && handle_error "Missing module name"
+        display_available_backups "$module_name"
+        exit 0
+    fi
+
+    if [ -n "$restore_module" ]; then
+        module_name="$restore_module"
+        validate_restore
+        confirm_operation "Restore module ${module_name}?"
+        restore_backup
+        exit 0
+    fi
+
+    if [ -n "$module_name" ] && [ -n "$plural_new" ]; then
+        init_environment
+        validate_required_params
+        validate_environment
+        validate_inputs
+        check_git_status
+        show_summary
+        confirm_operation "Proceed with copy?"
+        create_backup
+        copy_module
+        run_post_hooks
+        final_summary
+        exit 0
+    fi
+
+    handle_error "No valid operation specified"
+    exit 1
+}
+
+# Entry point with proper error trapping
+main "$@"
+--------------------------------
+lib/backup.sh
+#!/usr/bin/env bash
+# @title Backup Management
+# @description Backup creation and restoration
+
+create_backup() {
+    [ -z "$BACKUP_DIR" ] && handle_error "BACKUP_DIR not set"
+    [ -z "$module_name" ] && handle_error "module_name not set"
+    [ -z "$src_dir" ] && handle_error "Source directory path not set"
+
+    local timestamp
+    timestamp=$(date +%s)
+    export backup_dir_final="${BACKUP_DIR}/${module_name}_${timestamp}"
+    log_info "Creating backup: ${backup_dir_final/$BACKUP_DIR\//}"
+
+    [ ! -d "$src_dir" ] && handle_error "Source directory not found: $src_dir"
+    mkdir -p "$backup_dir_final" || handle_error "Backup directory creation failed"
+    cp -r "$src_dir/." "$backup_dir_final" || handle_error "Backup copy failed"
+}
+
+find_latest_backup() {
+    find "$BACKUP_DIR" -maxdepth 1 -name "${module_name}_*" -type d | sort -r | head -n1
+}
+
+restore_backup() {
+    local latest
+    latest=$(find_latest_backup)
+    [ -z "$latest" ] && handle_error "No backups available for module: $module_name"
+    log_info "Restoring from: ${latest/$BACKUP_DIR\//}"
+
+    mkdir -p "$(dirname "$src_dir")" || handle_error "Failed to create parent directory"
+    [ -d "$src_dir" ] && rm -rf "$src_dir"
+    cp -r "$latest/." "$src_dir" || {
+        rm -rf "$src_dir"
+        handle_error "Restore failed - system cleaned up"
+    }
+    log_success "Restored module $module_name successfully"
+}
+
+backup_exists() {
+    local module=$1
+    [ -z "$module" ] && handle_error "Module name required for backup check"
+    find "$BACKUP_DIR" -maxdepth 1 -name "${module}_*" -type d | grep -q .
+}
+---------------------------
+/lib/logging.sh
+#!/usr/bin/env bash
+# @file Logging functionality and output formatting
+
+# Define color codes
+declare -r COLOR_RED="\033[31m"
+declare -r COLOR_GREEN="\033[32m"
+declare -r COLOR_YELLOW="\033[33m"
+declare -r COLOR_RESET="\033[0m"
+
+# Initialize logging system
+init_logging() {
+    # Use absolute path for default log file
+    LOG_FILE=${LOG_FILE:-"${SCRIPT_DIR}/module-tools_$(date +%Y%m%d).log"}
+    LOG_DIR=$(dirname "$LOG_FILE")
+
+    # Create log directory with error handling
+    if ! mkdir -p "$LOG_DIR"; then
+        echo "❌ Critical Error: Failed to create log directory at ${LOG_DIR}" >&2
+        echo "❌ Check permissions or specify different log location with -l" >&2
+        exit 1
+    fi
+
+    # Save original descriptors
+    exec 3>&1 4>&2
+
+    # Redirect output only if not in help/version mode
+    if [[ "$1" != "--help" && "$1" != "--version" ]]; then
+        exec 1> >(tee -a "$LOG_FILE")
+        exec 2> >(tee -a "$LOG_FILE" >&2)
+    fi
+
+    log_success "Logging initialized at ${LOG_FILE}"
+    return 0
+}
+
+# Restore original file descriptors
+cleanup_logging() {
+    # Restore original descriptors if they exist
+    if { true >&3; } 2>/dev/null; then
+        exec 1>&3
+    fi
+    if { true >&4; } 2>/dev/null; then
+        exec 2>&4
+    fi
+}
+# Logging functions with emoji and colors
+log_success() { echo -e "${COLOR_GREEN}✅ $1${COLOR_RESET}"; }
+log_info() { echo -e "${COLOR_RESET}ℹ️  $1"; }
+log_warning() { echo -e "${COLOR_YELLOW}⚠️  $1${COLOR_RESET}" >&2; }
+log_error() { echo -e "${COLOR_RED}❌ $1${COLOR_RESET}" >&2; }
+
+# Color wrapper function
+colorize() {
+    local color=$1
+    shift
+    case $color in
+        red) echo -e "${COLOR_RED}$*${COLOR_RESET}";;
+        green) echo -e "${COLOR_GREEN}$*${COLOR_RESET}";;
+        yellow) echo -e "${COLOR_YELLOW}$*${COLOR_RESET}";;
+        *) echo -e "$*";;
+    esac
+}
+
+# Operation summary display
+show_summary() {
+    local dry_run_status="No"
+    local interactive_status="Yes"
+    
+    [[ "${CONFIG[dry_run]:-false}" == true ]] && dry_run_status="Yes"
+    [[ "${CONFIG[interactive]:-true}" == false ]] && interactive_status="No"
+    
+    cat << EOF
+$(colorize yellow "=== Operation Summary ===")
+$(printf "%-20s %s" "Operation Type:" "$([ -n "$restore_module" ] && echo "Restore" || echo "Copy")")
+$(printf "%-20s %s" "Source Module:" "${module_name:-N/A}") 
+$(printf "%-20s %s" "New Module:" "${plural_new:-N/A}")
+$(printf "%-20s %s" "Backup Directory:" "${backup_dir:-$BACKUP_DIR}")
+$(printf "%-20s %s" "Dry Run Mode:" "$dry_run_status")
+$(printf "%-20s %s" "Interactive Mode:" "$interactive_status")
+$(printf "%-20s %s" "Platform:" "${PLATFORM:-Unknown}")
+$(printf "%-20s %s" "Start Time:" "$(date +'%Y-%m-%d %H:%M:%S')")
+$(colorize yellow "=============================")
+EOF
+}
+
+# Display available backups for a module
+display_available_backups() {
+    local module=$1
+    
+    [ ! -d "$BACKUP_DIR" ] && handle_error "Backup directory not found"
+    [ -z "$module" ] && handle_error "Module name required"
+    
+    echo -e "\n$(colorize yellow "Available backups for $module:")"
+    
+    if ! find "$BACKUP_DIR" -maxdepth 1 -name "${module}_*" -type d 2>/dev/null | sort -r | while read -r backup; do
+        local timestamp
+        timestamp=$(basename "$backup" | cut -d_ -f2)
+        printf "• Backup from: %s (%s)\n" \
+            "$(date -d "@$timestamp" +'%Y-%m-%d %H:%M:%S' 2>/dev/null || date -r "$timestamp" +'%Y-%m-%d %H:%M:%S')" \
+            "$(basename "$backup")"
+    done; then
+        log_warning "No backups found for module: $module"
+        return 1
+    fi
+}
+-----------------------
+/lib/replacements.sh
+#!/usr/bin/env bash
+# @title Text Replacement Engine
+# @description Handles safe text/file replacements
+
+setup_replacements() {
+    [ -z "$module_name" ] && handle_error "module_name not set for replacements"
+    [ -z "$plural_new" ] && handle_error "plural_new not set for replacements"
+
+    singular_old="${module_name%s}"
+    plural_old="$module_name"
+    singular_new="${plural_new%s}"
+
+    [ -z "$singular_old" ] && handle_error "Failed to derive singular form of source module"
+    [ -z "$singular_new" ] && handle_error "Failed to derive singular form of target module"
+
+    replace_patterns=(
+        "s/${singular_old}/${singular_new}/g"
+        "s/${plural_old}/${plural_new}/g"
+    )
+    export replace_patterns
+}
+
+perform_replacements() {
+    if [[ "${CONFIG[dry_run]:-false}" == true ]]; then
+        simulate_replacements
+    else
+        execute_replacements
+    fi
+}
+
+execute_replacements() {
+    [ -z "$dest_dir" ] && handle_error "Destination directory not set"
+    local count=0
+    while IFS= read -r -d '' file; do
+        process_file "$file"
+        ((count++))
+    done < <(find "$dest_dir" -type f -print0)
+    log_success "Processed $count files successfully"
+}
+
+process_file() {
+    local file=$1
+    if file_is_text "$file"; then
+        safe_replace "$file"
+        rename_file "$file"
+    else
+        log_info "Skipping binary file: ${file/$dest_dir\//}"
+    fi
+}
+
+file_is_text() {
+    local file=$1
+    file "$file" | grep -qE 'text|empty'
+}
+
+rename_file() {
+    local file=$1
+    local new_name
+    new_name=$(echo "$file" | sed -e "s/$singular_old/$singular_new/g" -e "s/$plural_old/$plural_new/g")
+    if [ "$file" != "$new_name" ]; then
+        mv "$file" "$new_name" || handle_error "Failed to rename file: $file"
+    fi
+}
+--------------------
+/lib/utils.sh
+#!/usr/bin/env bash
+# @title Utilities Library
+# @description Core functions and configuration for module management
+
+# Core configuration variables
+export SCRIPT_VERSION="1.2.0"
+export BASE_DIR="src/modules"
+export BACKUP_DIR="backups/modules"
+export backup_dir_final=""
+export module_name=""
+export plural_new=""
+export singular_new=""
+export restore_module=""
+export LOG_FILE=""
+
+# Configuration array must be exported for child processes
+declare -xA CONFIG=(
+    [dry_run]="false"
+    [interactive]="true"
+    [force]="false"
+    [list_backups]="false"
+)
+export CONFIG
+
+# @function Initialize environment
+init_environment() {
+    detect_platform
+    setup_paths
+    check_dependencies
+}
+
+# @function Detect operating system
+detect_platform() {
+    case "$(uname -s)" in
+        Darwin*)    PLATFORM="macOS";;
+        Linux*)     PLATFORM="Linux";;
+        *)          handle_error "Unsupported platform: $(uname -s)"
+    esac
+}
+
+# @function Set script directory path
+setup_paths() {
+    # Initialize required paths
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    BASE_DIR="${SCRIPT_DIR}/../${BASE_DIR}"
+    BACKUP_DIR="${SCRIPT_DIR}/../${BACKUP_DIR}"
+
+    # Export BASE_DIR for other scripts
+    export BASE_DIR
+
+    # Set and export source directory path
+    if [ -n "$module_name" ]; then
+        src_dir="${BASE_DIR}/${module_name}"
+        export src_dir
+        echo "DEBUG: Source directory set to $src_dir"
+    fi
+
+    # Set and export destination directory path
+    if [ -n "$plural_new" ]; then
+        dest_dir="${BASE_DIR}/${plural_new}"
+        export dest_dir
+        echo "DEBUG: Destination directory set to $dest_dir"
+    fi
+}
+
+# @function Validate command dependencies
+check_dependencies() {
+    local missing=()
+    local required=(git sed awk find xargs)
+    [[ "$PLATFORM" == "macOS" ]] && required+=(gsed)
+    for cmd in "${required[@]}"; do
+        command -v "$cmd" &> /dev/null || missing+=("$cmd")
+    done
+    if [ ${#missing[@]} -gt 0 ]; then
+        handle_error "Missing dependencies: ${missing[*]}"
+        return 1
+    fi
+    return 0
+}
+
+# @function Parse command line arguments
+parse_arguments() {
+    [ $# -eq 0 ] && { show_help; return 0; }
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            -v|--version)
+                show_version
+                exit 0
+                ;;
+            -m|--module)
+                validate_argument "$1" "$2"
+                export module_name="$2"
+                shift 2
+                ;;
+            -n|--new)
+                validate_argument "$1" "$2"
+                export plural_new="$2"
+                shift 2
+                ;;
+            -r|--restore)
+                validate_argument "$1" "$2"
+                export restore_module="$2"
+                shift 2
+                ;;
+            -d|--dry-run)
+                CONFIG[dry_run]="true"
+                export CONFIG
+                shift
+                ;;
+            -f|--force)
+                CONFIG[interactive]="false"
+                export CONFIG
+                shift
+                ;;
+            -y|--non-interactive)
+                CONFIG[interactive]="false"
+                export CONFIG
+                shift
+                ;;
+            -b|--backup-dir)
+                validate_argument "$1" "$2"
+                export BACKUP_DIR="$2"
+                shift 2
+                ;;
+            --list-backups)
+                CONFIG[list_backups]="true"
+                export CONFIG
+                shift
+                ;;
+            *)
+                handle_error "Unknown option: $1"
+                shift
+                ;;
+        esac
+    done
+}
+
+validate_argument() {
+    local opt="$1"
+    local arg="$2"
+    echo "DEBUG: Validating option '$opt' with argument '$arg'"
+    [ -z "$arg" ] && handle_error "Option $opt requires an argument"
+    [[ "$arg" =~ ^- ]] && handle_error "Invalid argument for $opt: $arg"
+}
+
+cleanup() {
+    if command -v cleanup_logging &>/dev/null; then
+        cleanup_logging
+    fi
+    # Clean temporary files
+    [[ -d "${TMP_DIR:-}" ]] && rm -rf "$TMP_DIR"
+}
+
+cleanup_on_error() {
+    local exit_code=$1
+    log_error "Script failed with exit code: ${exit_code}"
+    cleanup
+    exit "${exit_code}"
+}
+
+# Handle errors
+handle_error() {
+    local message=$1
+    if command -v log_error &>/dev/null; then
+        log_error "$message"
+    else
+        echo -e "\033[31m❌ $message\033[0m" >&2
+    fi
+    return 1
+}
+
+# Show help message
+show_help() {
+    cat << EOF
+🚀 Module Management Tool v${SCRIPT_VERSION}
+Usage: module-copy [OPTIONS] --module MODULE --new NAME
+Core Commands:
+  -m, --module MODULE    Source module name (required)
+  -n, --new NAME         New module name (required)
+  -r, --restore MODULE   Restore module from backup
+  -h, --help             Show this help message
+  -v, --version          Display version information
+Operation Modes:
+  -d, --dry-run          Simulate changes without modifying files
+  -f, --force            Skip confirmation prompts
+  -y, --non-interactive  Disable interactive mode
+Advanced Options:
+  -b, --backup-dir DIR   Custom backup directory (default: ${BACKUP_DIR})
+  -l, --log-file FILE    Specify log file path
+  --list-backups         Show available backups for a module
+Examples:
+  Create new module:
+  $ module-copy -m products -n services
+  Restore module:
+  $ module-copy --restore products
+  Dry run with custom backup:
+  $ module-copy -m user -n client -d -b /custom/backups
+Documentation:
+  See README.md for detailed usage guide and examples
+EOF
+}
+
+show_version() {
+    echo -e "Module Management Tool v${SCRIPT_VERSION:-1.2.0}"
+    exit 0
+}
+-----------------
+/lib/validation.sh
+#!/usr/bin/env bash
+# @title Validation Library
+# @description Input validation and safety checks
+
+validate_restore() {
+    [ -z "$BACKUP_DIR" ] && handle_error "BACKUP_DIR variable not set"
+    [ -z "$module_name" ] && handle_error "Module name required for restore"
+    [ ! -d "$BACKUP_DIR" ] && mkdir -p "$BACKUP_DIR"
+    src_dir="${BASE_DIR}/${module_name}"
+    [ ! -d "$src_dir" ] && mkdir -p "$src_dir"
+}
+
+validate_inputs() {
+    [ -z "$plural_new" ] && handle_error "New module name is required"
+    [ -z "$module_name" ] && handle_error "Source module name is required"
+    validate_reserved_names
+    validate_syntax
+    validate_paths
+}
+
+validate_reserved_names() {
+    local reserved=("backup" "shared" "core" "base")
+    for name in "${reserved[@]}"; do
+        [ "$plural_new" = "$name" ] && handle_error "'$plural_new' is a reserved directory name"
+    done
+}
+
+validate_syntax() {
+    local name_regex='^[a-z][a-z0-9_-]{1,63}$'
+    [[ ! "${plural_new:-}" =~ $name_regex ]] && \
+        handle_error "Invalid name format. Use lowercase, numbers, hyphens/underscores"
+}
+
+validate_paths() {
+    [ -z "$src_dir" ] && handle_error "Source directory path not set"
+    [ -z "$dest_dir" ] && handle_error "Destination directory path not set"
+    [ ! -d "$src_dir" ] && handle_error "Source directory not found: $src_dir"
+    [ -d "$dest_dir" ] && handle_error "Destination already exists: $dest_dir"
+    [ ! -w "$(dirname "$src_dir")" ] && handle_error "Source directory not writable"
+    [ ! -w "$(dirname "$dest_dir")" ] && handle_error "Destination directory not writable"
+}
+
+validate_environment() {
+    [ -z "$SCRIPT_DIR" ] && handle_error "SCRIPT_DIR not set"
+    [ -z "$BASE_DIR" ] && handle_error "BASE_DIR not set"
+    [ -z "$BACKUP_DIR" ] && handle_error "BACKUP_DIR not set"
+    [ ! -d "$BASE_DIR" ] && mkdir -p "$BASE_DIR"
+    [ ! -d "$BACKUP_DIR" ] && mkdir -p "$BACKUP_DIR"
+}
+
+validate_required_params() {
+    [ -z "$module_name" ] && handle_error "Source module name (-m) is required"
+    [ -z "$plural_new" ] && handle_error "New module name (-n) is required"
+}

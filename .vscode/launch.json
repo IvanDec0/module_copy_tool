@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Module Copy",
+            "type": "bashdb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/module-copy",
+            "args": [
+                "-m", "test",
+                "-n", "test_copy",
+                "-l", "${workspaceFolder}/debug.log"
+            ],
+            "env": {
+                "BASE_DIR": "${workspaceFolder}/src/modules",
+                "BACKUP_DIR": "${workspaceFolder}/backups/modules"
+            },
+            "cwd": "${workspaceFolder}",
+            "trace": "verbose"
+        }
+    ]
+}

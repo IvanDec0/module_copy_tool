@@ -1,0 +1,686 @@
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:06:31
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738519592
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Renaming file: file1.txt → /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy_copy_copy/file1.txt
+mv: cannot move '/home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt' to '/home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy_copy_copy/file1.txt': No such file or directory
+[31m❌ Failed to rename file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:07:30
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738519651
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy_copy_copy/file1.txt
+[0mℹ️  Renaming file: file1.txt → /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy_copy_copy/file1.txt
+mv: cannot move '/home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt' to '/home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy_copy_copy/file1.txt': No such file or directory
+[31m❌ Failed to rename file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:09:43
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738519784
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:10:21
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738519822
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:12:20
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738519940
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing file: file1.txt
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:15:04
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520105
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:16:38
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520199
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Found 0 files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Destination already exists: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:17:25
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520245
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+_: line 2: process_file: command not found
+_: line 2: process_file: command not found
+_: line 2: process_file: command not found
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Destination already exists: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:18:10
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520290
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+_: line 1: process_file: command not found
+_: line 1: process_file: command not found
+_: line 1: process_file: command not found
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:20:19
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520419
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+environment: line 1: log_info: command not found
+environment: line 1: log_info: command not found
+environment: line 3: log_error: command not found
+environment: line 3: log_error: command not found
+environment: line 1: log_info: command not found
+environment: line 2: log_info: command not found
+environment: line 2: log_info: command not found
+environment: line 3: log_error: command not found
+environment: line 4: log_info: command not found
+environment: line 4: log_info: command not found
+environment: line 2: log_info: command not found
+environment: line 8: log_info: command not found
+environment: line 8: log_info: command not found
+environment: line 4: log_info: command not found
+environment: line 11: log_info: command not found
+environment: line 11: log_info: command not found
+environment: line 8: log_info: command not found
+environment: line 16: log_info: command not found
+environment: line 16: log_info: command not found
+environment: line 11: log_info: command not found
+environment: line 16: log_info: command not found
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/test_1738520419
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:21:04
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520464
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+ℹ️  Processing replacements in file: file1.txt
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+ℹ️  Processing replacements in file: tests.txt
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+❌ Replace patterns not initialized
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/tests.txt
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  No renaming needed for file: file1.txt
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/tests.txt
+ℹ️  No renaming needed for file: tests.txt
+ℹ️  Processing replacements in file: file2.js
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file2.js
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file2.js
+ℹ️  No renaming needed for file: file2.js
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/test_1738520464
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:21:48
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520508
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+ℹ️  Processing replacements in file: file1.txt
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+ℹ️  No renaming needed for file: file1.txt
+ℹ️  Processing replacements in file: test.js
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/test.js
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/test.js
+ℹ️  No renaming needed for file: test.js
+ℹ️  Processing replacements in file: tests.txt
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/tests.txt
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/tests.txt
+ℹ️  No renaming needed for file: tests.txt
+ℹ️  Processing replacements in file: file2.js
+❌ Replace patterns not initialized
+ℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file2.js
+ℹ️  Replacing singular_old (test) with singular_new (test_copy)
+ℹ️  Replacing plural_old (test) with plural_new (test_copy)
+ℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file2.js
+ℹ️  No renaming needed for file: file2.js
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/test_1738520508
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:24:38
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520678
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:26:36
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520796
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       test 
+New Module:          test_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:27:23
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: test_1738520843
+[0mℹ️  Copying module test to test_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=test_copy, plural_old=test, plural_new=test_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Processing replacements in file: file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Applying pattern: s/test/test_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[32m✅ Replacements completed successfully for file: file1.txt[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  Replacing singular_old (test) with singular_new (test_copy)
+[0mℹ️  Replacing plural_old (test) with plural_new (test_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test_copy/file1.txt
+[0mℹ️  No renaming needed for file: file1.txt
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Source directory not found: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/test[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:28:15
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738520896
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Processing replacements in file: test.js
+[0mℹ️  Applying pattern: s/test/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Applying pattern: s/tests/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[32m✅ Replacements completed successfully for file: test.js[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Replacing singular_old (test) with singular_new (tests_copy)
+[0mℹ️  Replacing plural_old (tests) with plural_new (tests_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  No renaming needed for file: test.js
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:29:33
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738520973
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Found 0 files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Processing replacements in file: test.js
+[0mℹ️  Applying pattern: s/test/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Applying pattern: s/tests/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[32m✅ Replacements completed successfully for file: test.js[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Replacing singular_old (test) with singular_new (tests_copy)
+[0mℹ️  Replacing plural_old (tests) with plural_new (tests_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  No renaming needed for file: test.js
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:30:43
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521043
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Applying pattern: s/test/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+sed: couldn't edit /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy: not a regular file
+[31m❌ Replacement failed for pattern: s/test/tests_copy/g in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:31:12
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521072
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Processing replacements in file: test.js
+[0mℹ️  Applying pattern: s/test/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Applying pattern: s/tests/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[32m✅ Replacements completed successfully for file: test.js[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Replacing singular_old (test) with singular_new (tests_copy)
+[0mℹ️  Replacing plural_old (tests) with plural_new (tests_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  No renaming needed for file: test.js
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:32:19
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521140
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/tests_1738521140
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:32:45
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521166
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+/home/ivan/Documents/Repos/copy_paste_experiment/lib/replacements.sh: line 35: read: `': not a valid identifier
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/tests_1738521166
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Destination already exists: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:33:39
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521219
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[32m✅ Processed 0 files successfully[0m
+[32m✅ Replacements complete[0m
+[32m✅ Module copy completed successfully[0m
+[0mℹ️  New module created at: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Backup stored at: /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules/tests_1738521219
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [0mℹ️  User confirmed operation: Continue despite uncommitted changes?
+[33m=== Operation Summary ===[0m
+Operation Type:      Copy
+Source Module:       tests 
+New Module:          tests_copy
+Backup Directory:    /home/ivan/Documents/Repos/copy_paste_experiment/backups/modules
+Dry Run Mode:        No
+Interactive Mode:    Yes
+Platform:            Linux
+Start Time:          2025-02-02 15:33:55
+[33m=============================[0m
+Proceed with copy? (y/N): [0mℹ️  User confirmed operation: Proceed with copy?
+[0mℹ️  Creating backup: tests_1738521235
+[0mℹ️  Copying module tests to tests_copy
+[32m✅ Module copied successfully[0m
+[0mℹ️  Setup replacements: singular_old=test, singular_new=tests_copy, plural_old=tests, plural_new=tests_copy
+[0mℹ️  Searching for files in: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy
+[0mℹ️  Processing file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Checking if file is text: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Performing replacements in file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Processing replacements in file: test.js
+[0mℹ️  Applying pattern: s/test/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Applying pattern: s/tests/tests_copy/g to file: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[32m✅ Replacements completed successfully for file: test.js[0m
+[0mℹ️  Original file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  Replacing singular_old (test) with singular_new (tests_copy)
+[0mℹ️  Replacing plural_old (tests) with plural_new (tests_copy)
+[0mℹ️  New file name: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy/test.js
+[0mℹ️  No renaming needed for file: test.js
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Destination already exists: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[31m❌ Destination already exists: /home/ivan/Documents/Repos/copy_paste_experiment/src/modules/tests_copy[0m
+[32m✅ Logging initialized at /home/ivan/Documents/Repos/copy_paste_experiment/logs/log_20250202.log[0m
+[33m⚠️  Uncommitted changes detected in git repository[0m
+Continue despite uncommitted changes? (y/N): [33m⚠️  User declined operation: Continue despite uncommitted changes?[0m
